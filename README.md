@@ -66,7 +66,7 @@ $click->parent()->associate($user);
 ## Using the `TrackPassendoClicks` trait.
 
 If you are implementing the `\Actengage\LaravelPassendo\TrackPassendoClicks`
-trait, then you can use the `clicks()` helper to create and associate a method
+trait, then you can use the `clicks()` helper to create and associate a model
 at once.
 
 ``` php
