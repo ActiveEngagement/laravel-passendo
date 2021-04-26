@@ -73,4 +73,5 @@ at once.
 User::create()->clicks()->create([
     'tracking_id' => 'test2',
     'cpa' => 1
-])
+]);
+```
