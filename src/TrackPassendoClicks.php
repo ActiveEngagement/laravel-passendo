@@ -21,7 +21,7 @@ trait TrackPassendoClicks {
         throw new MethodNotDefined('cpa');
     }
 
-    public function passendoTrackingId(): string
+    public function passendoTrackingId(): ?string
     {
         if(method_exists($this, 'tid')) {
             return (string) $this->tid();
