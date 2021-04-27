@@ -16,7 +16,7 @@ class PassendoServiceProvider extends ServiceProvider {
         $this->mergeConfigFrom(__DIR__ . '/../config/passendo.php', 'passendo');
 
         $this->publishes([
-            __DIR__ . '/../migrations' => database_path('migrations')
+            __DIR__ . '/../database/migrations' => database_path('migrations')
         ], 'migrations');
     }
 
