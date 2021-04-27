@@ -22,7 +22,7 @@ class User extends Model implements TrackPassendoClicksInterface {
 
     use Optionable, TrackPassendoClicks;
 
-    public function cpa(): int
+    public function cpa(): float
     {
         return $this->options->get('cpa');
     }

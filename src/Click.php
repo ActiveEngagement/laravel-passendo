@@ -13,7 +13,7 @@ use Throwable;
 
 class Click extends Model {
     
-    use DispatchesPassendoRequests, HandlesRequest;
+    use HandlesRequest;
 
     /**
      * The table associated with the model.

@@ -46,7 +46,11 @@ trait TrackPassendoClicks {
         
         foreach($triggers as $trigger) {
             static::$trigger(function($model) {
-                $model->createPassendoClick();
+                $dispatch = method_exists($model, 'shouldTrackPassendoClicks')
+                     ? $model->shouldTrackPassendoClicks()
+                     : true;
+
+                $dispatch && $model->createPassendoClick();
             }); 
         }
     }

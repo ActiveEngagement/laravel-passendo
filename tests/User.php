@@ -10,7 +10,7 @@ class User extends Model implements TrackPassendoClicksInterface {
 
     use TrackPassendoClicks;
 
-    public function cpa(): int
+    public function cpa(): float
     {
         return 1;
     }
@@ -18,5 +18,10 @@ class User extends Model implements TrackPassendoClicksInterface {
     public function tid(): string
     {
         return 'test';
+    }
+
+    public function shouldTrackPassendoClicks(): bool
+    {
+        return true;
     }
 }
