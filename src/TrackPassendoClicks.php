@@ -40,7 +40,7 @@ trait TrackPassendoClicks {
     
     public static function bootTrackPassendoClicks()
     {
-        $triggers = method_exists(__CLASS__, "definePassendoTriggers")
+        $triggers = method_exists(__CLASS__, 'definePassendoTriggers')
             ? static::definePassendoTriggers()
             : ['created'];
         
