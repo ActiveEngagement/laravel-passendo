@@ -35,47 +35,47 @@ class ConversionTest extends TestCase {
             new Response(200),
         ]));
         
-        $Conversion = Conversion::create([
+        $conversion = Conversion::create([
             'tracking_id' => '123',
             'cpa' => 1
         ]);        
 
-        $Conversion = $Conversion->fresh();
+        $conversion = $conversion->fresh();
 
-        $this->assertEquals(1, $Conversion->requests()->count());        
-        $this->assertEquals(500, $Conversion->status);
-        $this->assertFalse($Conversion->success);
-        $this->assertNotNull($Conversion->exception);
+        $this->assertEquals(1, $conversion->requests()->count());        
+        $this->assertEquals(500, $conversion->status);
+        $this->assertFalse($conversion->success);
+        $this->assertNotNull($conversion->exception);
 
         while($handler->count()) {
             try {
-                $Conversion->track();
+                $conversion->track();
             }
             catch(RequestException $e) {
-                $Conversion->failed($e);
+                $conversion->failed($e);
             }
         }
 
-        $this->assertEquals(3, $Conversion->requests()->count());
+        $this->assertEquals(3, $conversion->requests()->count());
         
-        $Conversion = $Conversion->fresh();
+        $conversion = $conversion->fresh();
 
-        $Conversion->parent()->associate(User::create());
+        $conversion->parent()->associate(User::create());
 
-        $this->assertEquals(200, $Conversion->status);
-        $this->assertTrue($Conversion->success);
-        $this->assertNull($Conversion->exception);
-        $this->assertInstanceOf(User::class, $Conversion->parent);
+        $this->assertEquals(200, $conversion->status);
+        $this->assertTrue($conversion->success);
+        $this->assertNull($conversion->exception);
+        $this->assertInstanceOf(User::class, $conversion->parent);
     }
 
     public function testThatConversionsWithInvalidTrackingId()
     {
-        $Conversion = new Conversion([
+        $conversion = new Conversion([
             'tracking_id' => '@trackingid@',
             'cpa' => 1
         ]);
 
-        $job = new TrackConversion($Conversion);
+        $job = new TrackConversion($conversion);
         
         try {
             $job->handle();
@@ -83,9 +83,9 @@ class ConversionTest extends TestCase {
             $job->failed($e);
         }
 
-        $this->assertEquals(0, $Conversion->code);
-        $this->assertFalse($Conversion->success);
-        $this->assertNotNull($Conversion->exception);
+        $this->assertEquals(0, $conversion->code);
+        $this->assertFalse($conversion->success);
+        $this->assertNotNull($conversion->exception);
     }
 
 }
