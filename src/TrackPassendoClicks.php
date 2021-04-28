@@ -3,7 +3,6 @@
 namespace Actengage\LaravelPassendo;
 
 use Actengage\LaravelPassendo\Exceptions\MethodNotDefined;
-use Exception;
 
 trait TrackPassendoClicks {
 
@@ -32,10 +31,15 @@ trait TrackPassendoClicks {
 
     public function createPassendoClick(string $tracking_id = null, float $cpa = null): Click
     {
-        return $this->clicks()->firstOrCreate([
-            'cpa' => $cpa ?: $this->passendoCpa(),
+        $click = $this->clicks()->firstOrNew([
             'tracking_id' => $tracking_id ?: $this->passendoTrackingId(),
         ]);
+
+        if(!$click->exists) {
+            $click->update(['cpa' => $cpa ?: $this->passendoCpa()]);
+        }
+
+        return $click;
     }
     
     public static function bootTrackPassendoClicks()

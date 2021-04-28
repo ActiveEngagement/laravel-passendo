@@ -31,6 +31,11 @@ class User extends Model implements TrackPassendoClicksInterface {
     {
         return $this->tracking_id;
     }
+
+    public function shouldTrackPassendoClicks(): bool
+    {
+        return true;
+    }
 }
 ```
 
