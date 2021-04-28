@@ -89,7 +89,7 @@ class Request extends Model {
      * 
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function send()
+    public function send(): ResponseInterface
     {
         // Update the send_at to the current time.
         $this->sent_at = now();

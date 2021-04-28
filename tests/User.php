@@ -20,8 +20,4 @@ class User extends Model implements TrackPassendoConversionsInterface {
         return 'test';
     }
 
-    public function shouldTrackPassendoConversions(): bool
-    {
-        return true;
-    }
 }
