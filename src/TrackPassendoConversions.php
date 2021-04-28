@@ -52,8 +52,8 @@ trait TrackPassendoConversions {
     public static function bootTrackPassendoconversions()
     {
         static::created(function($model) {
-            $dispatch = method_exists($model, 'shouldTrackPassendoconversions')
-                ? $model->shouldTrackPassendoconversions()
+            $dispatch = method_exists($model, 'shouldTrackPassendoConversions')
+                ? $model->shouldTrackPassendoConversions()
                 : $model->validateTrackingId();
 
 
