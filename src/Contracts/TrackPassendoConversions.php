@@ -8,6 +8,4 @@ interface TrackPassendoConversions {
 
     public function tid(): ?string;
 
-    public function shouldTrackPassendoConversions(): bool;
-
 }
