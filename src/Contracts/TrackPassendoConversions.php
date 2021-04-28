@@ -2,12 +2,12 @@
 
 namespace Actengage\LaravelPassendo\Contracts;
 
-interface TrackPassendoClicks {
+interface TrackPassendoConversions {
 
     public function cpa(): float;
 
     public function tid(): ?string;
 
-    public function shouldTrackPassendoClicks(): bool;
+    public function shouldTrackPassendoConversions(): bool;
 
 }

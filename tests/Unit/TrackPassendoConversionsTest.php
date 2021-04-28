@@ -18,8 +18,8 @@ class TrackPassendoClicksTest extends TestCase {
 
         $user = User::create();
 
-        $this->assertInstanceOf(User::class, $user->clicks()->first()->parent);
-        $this->assertEquals(1, $user->clicks()->count());
+        $this->assertInstanceOf(User::class, $user->conversions()->first()->parent);
+        $this->assertEquals(1, $user->conversions()->count());
     }
 
 }

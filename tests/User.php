@@ -2,13 +2,13 @@
 
 namespace Actengage\LaravelPassendo\Tests;
 
-use Actengage\LaravelPassendo\Contracts\TrackPassendoClicks as TrackPassendoClicksInterface;
-use Actengage\LaravelPassendo\TrackPassendoClicks;
+use Actengage\LaravelPassendo\Contracts\TrackPassendoConversions as TrackPassendoConversionsInterface;
+use Actengage\LaravelPassendo\TrackPassendoConversions;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model implements TrackPassendoClicksInterface {
+class User extends Model implements TrackPassendoConversionsInterface {
 
-    use TrackPassendoClicks;
+    use TrackPassendoConversions;
 
     public function cpa(): float
     {
@@ -20,7 +20,7 @@ class User extends Model implements TrackPassendoClicksInterface {
         return 'test';
     }
 
-    public function shouldTrackPassendoClicks(): bool
+    public function shouldTrackPassendoConversions(): bool
     {
         return true;
     }

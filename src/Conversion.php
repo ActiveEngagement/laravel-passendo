@@ -3,7 +3,7 @@
 namespace Actengage\LaravelPassendo;
 
 use Actengage\LaravelPassendo\Exceptions\InvalidTrackingId;
-use Actengage\LaravelPassendo\Jobs\TrackClick;
+use Actengage\LaravelPassendo\Jobs\TrackConversion;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-class Click extends Model {
+class Conversion extends Model {
     
     use HandlesRequest;
 
@@ -20,7 +20,7 @@ class Click extends Model {
      *
      * @var string
      */
-    protected $table = 'passendo_clicks';  
+    protected $table = 'passendo_conversions';  
 
     /**
      * The attributes that are fillable.
@@ -93,7 +93,7 @@ class Click extends Model {
      */
     public function track(): Request
     {
-        // First check to see if the click was already tracked...
+        // First check to see if the conversion was already tracked...
         if($this->success) {
             return $this->requests()->success()->firstOrFail();
         }
@@ -143,7 +143,7 @@ class Click extends Model {
      */
     public function dispatch($debug = false)
     {
-        TrackClick::dispatch($this, $debug);
+        TrackConversion::dispatch($this, $debug);
     }
     
     /**

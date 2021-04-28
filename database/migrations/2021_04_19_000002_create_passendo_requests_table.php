@@ -15,8 +15,8 @@ class CreatePassendoRequestsTable extends Migration
     {
         Schema::create('passendo_requests', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('click_id')->unsigned();
-            $table->foreign('click_id')->references('id')->on('passendo_clicks')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('conversion_id')->unsigned();
+            $table->foreign('conversion_id')->references('id')->on('passendo_conversions')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('success')->nullable()->index();
             $table->integer('status')->nullable()->index();
             $table->text('exception')->nullable();

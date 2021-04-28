@@ -43,13 +43,13 @@ class Request extends Model {
     ];
 
     /**
-     * Get the parent click.
+     * Get the parent conversion.
      * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function click()
+    public function conversion()
     {
-        return $this->belongsTo(Click::class, 'click_id');
+        return $this->belongsTo(Conversion::class, 'conversion_id');
     }
 
     /**
@@ -100,13 +100,13 @@ class Request extends Model {
     }
 
     /**
-     * Get the uri from the parent click.
+     * Get the uri from the parent conversion.
      *
      * @return string
      */
     public function trackingUri()
     {
-        return $this->click->trackingUri();
+        return $this->conversion->trackingUri();
     }
     
     /**
@@ -124,7 +124,7 @@ class Request extends Model {
         
         $this->save();
 
-        $this->click->success($response);
+        $this->conversion->success($response);
     }
     
     /**
@@ -141,7 +141,7 @@ class Request extends Model {
             'received_at' => now(),
         ])->save();
         
-        $this->click->failed($e);
+        $this->conversion->failed($e);
     }
 
     /**
@@ -165,8 +165,8 @@ class Request extends Model {
         parent::boot();
         
         parent::created(function($model) {
-            $model->click->total_requests = $model->click->requests()->count();
-            $model->click->save();
+            $model->conversion->total_requests = $model->conversion->requests()->count();
+            $model->conversion->save();
 
             SendHttpRequest::dispatch($model);
         });

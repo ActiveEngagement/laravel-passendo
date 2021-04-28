@@ -2,7 +2,7 @@
 
 namespace Actengage\LaravelPassendo\Jobs;
 
-use Actengage\LaravelPassendo\Click;
+use Actengage\LaravelPassendo\Conversion;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -10,18 +10,18 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Throwable;
 
-class TrackClick implements ShouldQueue
+class TrackConversion implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, SerializesModels, Queueable;
 
     public $debug;
 
     /**
-     * The passendo click being tracked.
+     * The passendo conversion being tracked.
      * 
-     * @var \Actengage\LaravelPassendo\Click
+     * @var \Actengage\LaravelPassendo\Conversion
      */
-    public $click;
+    public $conversion;
     
     /**
      * Delete the job if its models no longer exist.
@@ -35,9 +35,9 @@ class TrackClick implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Click $click)
+    public function __construct(Conversion $conversion)
     {
-        $this->click = $click;
+        $this->conversion = $conversion;
     }
     
     /**
@@ -68,7 +68,7 @@ class TrackClick implements ShouldQueue
      */
     public function handle()
     {   
-        $this->click->track();
+        $this->conversion->track();
     }
 
     /**
@@ -79,6 +79,6 @@ class TrackClick implements ShouldQueue
      */
     public function failed(Throwable $exception)
     {
-        $this->click->failed($exception);
+        $this->conversion->failed($exception);
     }
 }
