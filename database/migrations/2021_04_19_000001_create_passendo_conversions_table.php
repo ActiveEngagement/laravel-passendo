@@ -17,7 +17,7 @@ class CreatePassendoConversionsTable extends Migration
             $table->bigIncrements('id');
             $table->nullableMorphs('parent');
             $table->string('tracking_id')->unique();
-            $table->integer('cpa');
+            $table->double('cpa');
             $table->integer('total_requests')->default(0);
             $table->boolean('success')->nullable()->index();
             $table->integer('status')->nullable();
