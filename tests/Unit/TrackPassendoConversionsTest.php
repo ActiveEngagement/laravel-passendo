@@ -8,7 +8,7 @@ use Actengage\LaravelPassendo\Tests\User;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 
-class TrackPassendoClicksTest extends TestCase {
+class TrackPassendoConversionsTest extends TestCase {
 
     public function testImplementingTrait()
     {

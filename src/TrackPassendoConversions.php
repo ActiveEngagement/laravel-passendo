@@ -3,6 +3,7 @@
 namespace Actengage\LaravelPassendo;
 
 use Actengage\LaravelPassendo\Exceptions\MethodNotDefined;
+use Illuminate\Database\QueryException;
 
 trait TrackPassendoConversions {
 
@@ -36,17 +37,16 @@ trait TrackPassendoConversions {
 
     public function createPassendoConversion(?string $tracking_id = null, ?float $cpa = null): Conversion
     {
-        $conversion = $this->conversions()->firstOrNew([
-            'tracking_id' => $tracking_id ?: $this->passendoTrackingId(),
-        ]);
-
-        if(!$conversion->cpa) {
-            $conversion->cpa = $cpa ?: $this->passendoCpa();
+        try {
+            return $this->conversions()->firstOrCreate([
+                'tracking_id' => $tracking_id ?: $this->passendoTrackingId(),
+            ], [
+                'cpa' => $cpa ?: $this->passendoCpa()
+            ]);    
         }
-        
-        $conversion->save();
-
-        return $conversion;
+        catch (QueryException $e) {
+            return $this->createPassendoConversion($tracking_id, $cpa);
+        }
     }
     
     public static function bootTrackPassendoconversions()
@@ -57,7 +57,9 @@ trait TrackPassendoConversions {
                 : $model->validateTrackingId();
 
 
-            $dispatch && $model->createPassendoConversion();
+            if($dispatch) {
+                $model->createPassendoConversion();
+            }
         });
     }
 }
